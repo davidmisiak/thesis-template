@@ -1,0 +1,107 @@
+% Use values that are applicable to you and your thesis.
+
+\newif\ifenglish{}
+\englishtrue{} % english language
+% \englishfalse{} % slovak language
+
+\newif\ifbachelor{}
+\bachelortrue{} % bachelor's thesis
+% \bachelorfalse{} % master's thesis
+
+\newif\ifcompsci{}
+\compscitrue{} % computer science
+% \compscifalse{} % bioinformatics
+
+\newif\ifconsultant{}
+% \consultanttrue{} % I have a consultant
+\consultantfalse{} % no consultant
+
+% The year in which you plan to turn the thesis in.
+\newcommand{\thesisyear}{2022}
+
+% Tip - use the `\\` to split a long thesis name nicely.
+\newcommand{\thesisname}{Extraordinarily Long Example Name \\ of My Awesome Project}
+
+% If you are writing a master's thesis, don't forget to add Bc. here.
+\newcommand{\thesisauthor}{Adam~Fiktívny}
+
+\newcommand{\thesissupervisor}{doc.~RNDr.~Boris~Fiktívny,~PhD.}
+
+\ifconsultant{}
+    \newcommand{\thesisconsultant}{doc.~RNDr.~Cyril~Fiktívny,~PhD.}
+\fi
+
+\newcommand{\thesisacknowledgments}{
+    You can thank anyone who helped you with the thesis here (e.g.\ your supervisor).
+}
+
+\newcommand{\thesisabstractsk}{
+    Slovenský abstrakt v rozsahu 100--500 slov, jeden odstavec. Abstrakt stručne sumarizuje výsledky práce. Mal by byť pochopiteľný pre bežného informatika. Nemal by teda využívať skratky, termíny alebo označenie zavedené v práci, okrem tých, ktoré sú všeobecne známe.
+}
+
+\newcommand{\thesisabstracten}{
+    Abstract in the English language (translation of the abstract in the Slovak language).
+}
+
+\newcommand{\thesiskeywordssk}{Slovak, keywords, here}
+
+\newcommand{\thesiskeywordsen}{English, keywords, here}
+
+\newcommand{\thesischapters}{
+    \input chapters/00-introduction.tex
+    \input chapters/10-terminology.tex
+    \input chapters/20-algorithms.tex
+    \input chapters/30-results.tex
+    \input chapters/90-conclusion.tex
+}
+
+\newcommand{\thesisappendices}{
+    \input chapters/91-appendixA.tex
+    \input chapters/92-appendixB.tex
+}
+
+% Thesis type, field, programme and department are set here automatically, but please check that
+% the values are indeed correct for you.
+% If your supervisor works at FMFI, set the \thesisdepartment to the supervisor's department (this
+% one should also be present in the thesis assignment in AIS). Otherwise, keep the Department of
+% Computer Science.
+\ifenglish{}
+    \ifbachelor{}
+        \newcommand{\thesistype}{Bachelor's Thesis}
+    \else
+        \newcommand{\thesistype}{Master's Thesis}
+    \fi
+    \ifcompsci{}
+        \newcommand{\thesisfield}{Computer Science}
+        \newcommand{\thesisprogramme}{Computer Science}
+    \else
+        \newcommand{\thesisfield}{Computer Science and Biology}
+        \newcommand{\thesisprogramme}{Bioinformatics}
+    \fi
+    \newcommand{\thesisdepartment}{Department of Computer Science}
+    \newcommand{\thesisfaculty}{Faculty of Mathematics, Physics and Informatics}
+    \newcommand{\thesisuniversity}{Comenius University in Bratislava}
+\else
+    \ifbachelor{}
+        \newcommand{\thesistype}{Bakalárska práca}
+    \else
+        \newcommand{\thesistype}{Diplomová práca}
+    \fi
+    \ifcompsci{}
+        \newcommand{\thesisfield}{Informatika}
+        \newcommand{\thesisprogramme}{Informatika}
+    \else
+        \newcommand{\thesisfield}{Informatika a Biológia}
+        \newcommand{\thesisprogramme}{Bioinformatika}
+    \fi
+    \newcommand{\thesisdepartment}{Katedra informatiky}
+    \newcommand{\thesisfaculty}{Fakulta matematiky, fyziky a informatiky}
+    \newcommand{\thesisuniversity}{Univerzita Komenského v Bratislave}
+\fi
+\newcommand{\thesislocation}{Bratislava}
+
+% Helpers
+
+\newif\ifshowframe{}
+% \showframetrue{} % show page frames to debug positioning
+\showframefalse{} % normal
