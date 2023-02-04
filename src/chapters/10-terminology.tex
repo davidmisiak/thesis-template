@@ -1,3 +1,59 @@
-\chapter{Terminology}\label{ch:terminology}
+\chapter{Terminology}\label{ch:preliminaries}
 
-An example chapter.
+\section{Graphs}
+
+Here we define the basic terminology used in this thesis.
+
+\begin{definition}
+    We write $G$ for a graph and $V(G)$ and $E(G)$ for its vertes set and edge set respectively.
+    We assume no graph constraints unless otherwise specified, so loops and duplicit edges are allowed in general.
+\end{definition}
+
+\begin{definition}
+    We write $e = vw \in E(G)$ to indicate that the edge $e$ of $G$ has endpoints $v$ and $w$.
+\end{definition}
+
+\begin{definition}
+    A \textit{k-regular} graph is a graph where each vertex has degree $k$.
+\end{definition}
+
+\begin{definition}
+    A \textit{circle} or a \textit{circuit} is a connected 2-regular subgraph.
+\end{definition}
+
+\begin{definition}
+    A \textit{cubic} graph is a 3-regular graph.
+\end{definition}
+
+\section{Signed graphs}
+
+Signed graphs were introduced by Harary\cite{harary} in 1953 as a model for social networks. 
+A signed graph has a value of $+1$ or $-1$ assigned to all edges, so each edge is positive or negative.
+They have proved to be a natural generalization of unsigned graphs in many ways and interesting observations may arise
+by applying ordinary graph theory to signed graphs.
+
+\begin{definition}
+    A \textit{signed graph} is a pair $(G, \Sigma)$; $\Sigma \subseteq E(G)$, where $\Sigma$ is a subset of the edge set of $G$ and contains the negative edges.
+\end{definition}
+
+\begin{definition}
+    Function $\sigma : E(G) \rightarrow \{+1; -1\}$ denotes the sign of an edge $e$.
+\end{definition}
+
+A signed graph can also be defined as a pair $(G, \sigma)$ using the sign function directly,
+but I found this definition more natural.
+
+\section{Coloring}
+
+Vertex and edge coloring is a deeply explored topic of graph theory, even in the field of signed graphs.
+The research was initiated by Zaslavsky\cite{zaslavsky} in the early 1980s and published in multiple seminary papers.
+He defined a vertex n-coloring of a signed graph.
+
+\begin{definition}[Zaslavsky]
+    A n-coloring of a signed graph $(G, \Sigma)$ is 
+    $\phi : V(E) \rightarrow \{-n, -(n-1), \dots -1, 0, 1, \dots, (n-1, n)\}$
+    where for each edge $e = vw \in E(G)$: $\phi (v) \neq \sigma (e) \phi (w)$.
+\end{definition}
+
+So each vertex in $G$ is assigned a signed color so that the condition of vertex coloring in unsigned graphs (adapted to signed colors) still stands.
+
