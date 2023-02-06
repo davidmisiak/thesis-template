@@ -19,10 +19,16 @@ Here we define the basic terminology used in this thesis.
 
 \begin{definition}
     A \textit{circle} or a \textit{circuit} is a connected 2-regular subgraph.
+    A circle is \textit{positive} if the product of its edge signs is positive and 
+    \textit{negative} otherwise.
 \end{definition}
 
 \begin{definition}
     A \textit{cubic} graph is a 3-regular graph.
+\end{definition}
+
+\begin{definition}
+    A \textit{chromatic number} of a graph $G$ is the number of colors required for a proper vertex coloring of said graph.
 \end{definition}
 
 \section{Signed graphs}
@@ -43,17 +49,122 @@ by applying ordinary graph theory to signed graphs.
 A signed graph can also be defined as a pair $(G, \sigma)$ using the sign function directly,
 but I found this definition more natural.
 
-\section{Coloring}
+\begin{definition}
+    Given a signed graph $(G, \Sigma)$, \textit{switching} at a vertex $v$ inverts the sign of each edge
+    incident with $v$. 
+\end{definition}
+
+Using the previously mentioned definition of a signed graph, the resulting graph after a switching
+is the symmetric difference of $\Sigma$ and the set of edges incident with $v$.
+
+\begin{definition}
+    Two graphs are \textit{equivalent} if one can be obtained from the other through a series of vertex switchings.
+    Switching equivalence is an equivalence relation and we write $[(G, \Sigma)]$ for an equivalence class of $(G, \Sigma)$ under this relation.
+\end{definition}
+
+Additionally, switching doesn't change the signs of circuits in a graph, so two signed graphs 
+are equivalent if their underlying graphs and the signs of all circuits are the same. 
+Consequently, all properties depending only on the signs of the circuits are invariant for all graphs in $[(G, \Sigma)]$.
+
+\begin{definition}
+    A circuit is \textit{balanced} if the product of the signs of its edges is positive.
+\end{definition}
+
+\begin{definition}
+    A signed graph is \textit{balanced} if all of its circuits are balanced.
+\end{definition}
+
+Balance is an important concept in the sign graph theory, becauase balanced signed graphs $(G, \Sigma)$ are equivalent to $(G, \{\})$ (an all-positive graph with the same underlying graph).
+
+\begin{definition}
+    A signed graph $(G, \Sigma)$ is \textit{antibalanced} if it is equivalent to $(G, V(G))$ (the same graph with all-negative signature).
+\end{definition}
+
+Equivalent signed graphs have the same sets of balanced circuits and same sets of unbalanced circuits.
+Additionally, if $(G, \Sigma)$ is balanced, then $(G, V(G) - \Sigma)$ is antibalanced.
+Given a partition $(A, B)$ of $V(G)$, let $[A, B]$ denote the set of all edges with one end in $A$ and the other in $B$.
+
+\begin{theorem}[Harary \cite{harary}]\label{vertex-set-partition}
+    A signed graph $(G, \Sigma)$ is balanced if and only if there is a set $X \subseteq V(G)$ such that $\Sigma = [X, V(G) - X]$.
+\end{theorem}
+
+
+
+\section{Vertex coloring}
 
 Vertex and edge coloring is a deeply explored topic of graph theory, even in the field of signed graphs.
-The research was initiated by Zaslavsky\cite{zaslavsky} in the early 1980s and published in multiple seminary papers.
-He defined a vertex n-coloring of a signed graph.
+The research was initiated by Zaslavsky\cite{zaslavsky-graphs} in the early 1980s and published in multiple seminary papers\cite{zaslavsky-invariants,zaslavsky-coloring,zaslavsky-colorful}.
+Máčajová, Raspaud and Škoviera expand on this topic in The chromatic number of a signed graph\cite{chromatic-number},
+focusing on the behaviour of colorings instead of the polynomial invariants, which Zaslavsky's research concentrates on.
 
 \begin{definition}[Zaslavsky]
-    A n-coloring of a signed graph $(G, \Sigma)$ is 
-    $\phi : V(E) \rightarrow \{-n, -(n-1), \dots -1, 0, 1, \dots, (n-1, n)\}$
+    A \textit{proper vertex coloring} of a signed graph $(G, \Sigma)$ is 
+    $\phi : V(E) \rightarrow \mathbb{Z}$
     where for each edge $e = vw \in E(G)$: $\phi (v) \neq \sigma (e) \phi (w)$.
 \end{definition}
 
-So each vertex in $G$ is assigned a signed color so that the condition of vertex coloring in unsigned graphs (adapted to signed colors) still stands.
+Vertices connected by a positive edge must not have the same color and vertices connected by a negative edge must not have opposite colors.
+This definition is natural mainly because of the consistency under vertex switching, but also other reasons discussed by Zaslavsky.
+Zaslavsky originally defined the coloring of a signed graph in $k$ colors or $2k+1$ signed colors as 
+a mapping $V(G) \rightarrow \{-k, -(k-1), \dots, -1,0,1, \dots , (k-1), k\}$. 
+A coloring is zero-free if no vertex is colored 0. He then defined the \textit{chromatic polynomial} $\chi _G (\lambda)$ to be the function
+whose values for negative arguments $\lambda = 2k + 1$ are the numbers of signed colorings in $k$ colors. The \textit{balanced chromatic polynomial}
+$\chi _G ^b (\lambda)$ defined
+for positive arguments $\lambda = 2k$ are the numbers of zero-free signed colorings in $k$ colors.
+Finally, the \textit{chromatic number} $\gamma(G)$ of $G$ is the smallest non-negative integer $k$ such that $\chi (2k+1) > 0$ and the \textit{strict chromatic number} $\gamma * (G)$ is the 
+same for the balanced chromatic polynomial $\chi _G ^b (2k) > 0$.
+
+The Zaslavsky's definitions are sound, but they are not direct extensions of the chromatic polynomials and chromatic number for 
+unsigned graphs. That is because they basically count the absolute values of colors. It makes sense to require a signed version of any graph invariant to agree with its underlying graph for balanced signed graphs.
+Máčajová et. al.\cite{chromatic-number} instead propose different definitions.
+They first define sets $M_n \subseteq \mathbb{Z}$ for each $n \geq 1$ as $M_n = \{\pm 1, \pm 2, \dots , \pm k\}$ if $n = 2k$; $k \in \mathbb{N}$
+and $M_n = \{0, \pm 1, \pm 2, \dots , \pm k\}$ if $n = 2k + 1$ respectively.
+We can then define a \textit{proper n-coloring} that uses colors from $M_n$. The smallest $n$ such that 
+an \textit{n-coloring} exists. In comparison to Zaslavsky, this way an n-coloring uses exactly $n$ colors.
+
+\section{Chromatic number}
+
+Now we will explore some properties of the chromatic number of signed graphs as defined by Máčajová et. al. The proofs can be found in \cite{chromatic-number}.
+If $(G, \Sigma)$ has a positive loop, a proper coloring is not possible. So for the rest of this section we assume
+only graphs without positive loops. It is also good to keep in mind that the color $0$ behaves differently from the other colors, because $0 = -0$. 
+(For example if there is a negative loop at a vertex $v$, then $\phi (v) \neq 0$.)
+First, let's compare the chromatic number of a signed graph to the chromatic number of its underlying graph.
+
+\begin{theorem}[Máčajová et. al.]
+    For every loopless signed graph $(G, \Sigma)$ we have
+
+    $$\chi ((G, \Sigma)) \leq 2 \chi (G) - 1$$
+
+    Furthermore, this boundary is sharp.
+\end{theorem}
+
+The idea for the first part is that each coloring of $G$ using colors in $\{0, 1, \dots, n-1\}$
+is also a signed coloring of $(G, \Sigma)$ using colors from $\{0, \pm 1, \pm 2, \dots, \pm (n-1)\} = M_{2n-1}$.
+
+A signed graph is antibalanced if the sign product on every even circuit is positive and on every odd circuit negative.
+(Each such graph is equivalent to an all-negative signature). Based on \cref{vertex-set-partition}, we can partition the 
+vertex set of an antibalanced signed graph into two sets such that each edge with one end in the first set and the other end in the second set is positive and edges inside the sets are negative.
+A balanced antibalanced signed graph has to be bipartite, so antibalanced signed graphs are a natural generalization of bipartite graphs.
+
+\begin{proposition}[Máčajová et. al.]
+    A signed graph is 2-colorable ($\chi ((G, \Sigma)) \leq 2$) if and only if it is antibalanced.
+\end{proposition}
+
+If the graph is antibalanced, we can switch some vertices to make it all-negative and color all vertices $1$.
+If the graph is 2-colorable, we can partition the vertices into positive ($V_1$) and negative ($V_{-1}$).
+The edges within the sets have to be negative and edges between the sets have to be positive, which fulfils the condition for an antibalanced graph.
+
+\begin{proposition}
+    If $(G, \Sigma)$ is a signed complete graph on $n$ vertices, then $\chi ((G, \Sigma)) \leq n$. 
+    Furthermore, $\chi ((G, \Sigma)) = n$ if and only if $(G, \Sigma)$ is balanced.
+\end{proposition}
+
+\cite{chromatic-number} proves the Brooks theorem\cite{brooks} for signed graphs and concludes by proving the 5 color theorem for planar signed graphs.
+
+\begin{theorem}
+    Let $(G, \Sigma)$ be a simple connected signed graph. If $(G, \Sigma)$ is not a balanced copmlete graph,
+    a balanced odd circuit or an unbalanced even circuit, then $\chi ((G, \Sigma)) \leq \Delta (G)$.
+\end{theorem}
+
+($\Delta (G)$ is the maximum degree of $G$)
 
