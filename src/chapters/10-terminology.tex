@@ -1,8 +1,8 @@
-\chapter{Terminology}\label{ch:preliminaries}
-
-\section{Graphs}
+\chapter{Terminology}\label{ch:terminology}
 
 Here we define the basic terminology used in this thesis.
+
+\section{Graphs}
 
 \begin{definition}
     We write $G$ for a graph and $V(G)$ and $E(G)$ for its vertes set and edge set respectively.
@@ -67,11 +67,7 @@ are equivalent if their underlying graphs and the signs of all circuits are the 
 Consequently, all properties depending only on the signs of the circuits are invariant for all graphs in $[(G, \Sigma)]$.
 
 \begin{definition}
-    A circuit is \textit{balanced} if the product of the signs of its edges is positive.
-\end{definition}
-
-\begin{definition}
-    A signed graph is \textit{balanced} if all of its circuits are balanced.
+    A signed graph is \textit{balanced} if all of its circuits are positive.
 \end{definition}
 
 Balance is an important concept in the sign graph theory, becauase balanced signed graphs $(G, \Sigma)$ are equivalent to $(G, \{\})$ (an all-positive graph with the same underlying graph).
@@ -80,15 +76,13 @@ Balance is an important concept in the sign graph theory, becauase balanced sign
     A signed graph $(G, \Sigma)$ is \textit{antibalanced} if it is equivalent to $(G, V(G))$ (the same graph with all-negative signature).
 \end{definition}
 
-Equivalent signed graphs have the same sets of balanced circuits and same sets of unbalanced circuits.
+Equivalent signed graphs have the same sets of positive circuits and same sets of negative circuits.
 Additionally, if $(G, \Sigma)$ is balanced, then $(G, V(G) - \Sigma)$ is antibalanced.
 Given a partition $(A, B)$ of $V(G)$, let $[A, B]$ denote the set of all edges with one end in $A$ and the other in $B$.
 
 \begin{theorem}[Harary \cite{harary}]\label{vertex-set-partition}
     A signed graph $(G, \Sigma)$ is balanced if and only if there is a set $X \subseteq V(G)$ such that $\Sigma = [X, V(G) - X]$.
 \end{theorem}
-
-
 
 \section{Vertex coloring}
 
@@ -122,49 +116,22 @@ and $M_n = \{0, \pm 1, \pm 2, \dots , \pm k\}$ if $n = 2k + 1$ respectively.
 We can then define a \textit{proper n-coloring} that uses colors from $M_n$. The smallest $n$ such that 
 an \textit{n-coloring} exists. In comparison to Zaslavsky, this way an n-coloring uses exactly $n$ colors.
 
-\section{Chromatic number}
+\section{Edge coloring}
 
-Now we will explore some properties of the chromatic number of signed graphs as defined by Máčajová et. al. The proofs can be found in \cite{chromatic-number}.
-If $(G, \Sigma)$ has a positive loop, a proper coloring is not possible. So for the rest of this section we assume
-only graphs without positive loops. It is also good to keep in mind that the color $0$ behaves differently from the other colors, because $0 = -0$. 
-(For example if there is a negative loop at a vertex $v$, then $\phi (v) \neq 0$.)
-First, let's compare the chromatic number of a signed graph to the chromatic number of its underlying graph.
+In Edge coloring of signed graphs\cite{behr-edge-coloring}, Behr adopts the signed color sets defined by Máčajová et. al.
 
-\begin{theorem}[Máčajová et. al.]
-    For every loopless signed graph $(G, \Sigma)$ we have
+\begin{definition}[Behr]
+    An \textit{n-edge coloring} $\gamma$ of $(G, \Gamma)$ is an assignment of colors from $M_n$ to each vertex-edge incidence of $G$ such that $\gamma (v, e)$ = $- \sigma (e) \gamma(w,e)$ for each edge $e = vw$.
+    If an edge $e$ exists such that $\gamma (v,e) = a$, then the color $a$ is present at $v$.
+\end{definition}
 
-    $$\chi ((G, \Sigma)) \leq 2 \chi (G) - 1$$
+The same condition for a \textit{proper n-edge coloring} applies to the signed version, no color can be present more than once at any vertex.
 
-    Furthermore, this boundary is sharp.
-\end{theorem}
+Coloring each vertex-edge incidence makes signed edge coloring particularly interesting. 
+This definition also behaves naturally under switching; if we switch a vertex and all colors present at said vertex, the coloring remains consistent.
+But again, we have to be mindful of the color $0$ as in the case of vertex coloring.
 
-The idea for the first part is that each coloring of $G$ using colors in $\{0, 1, \dots, n-1\}$
-is also a signed coloring of $(G, \Sigma)$ using colors from $\{0, \pm 1, \pm 2, \dots, \pm (n-1)\} = M_{2n-1}$.
-
-A signed graph is antibalanced if the sign product on every even circuit is positive and on every odd circuit negative.
-(Each such graph is equivalent to an all-negative signature). Based on \cref{vertex-set-partition}, we can partition the 
-vertex set of an antibalanced signed graph into two sets such that each edge with one end in the first set and the other end in the second set is positive and edges inside the sets are negative.
-A balanced antibalanced signed graph has to be bipartite, so antibalanced signed graphs are a natural generalization of bipartite graphs.
-
-\begin{proposition}[Máčajová et. al.]
-    A signed graph is 2-colorable ($\chi ((G, \Sigma)) \leq 2$) if and only if it is antibalanced.
-\end{proposition}
-
-If the graph is antibalanced, we can switch some vertices to make it all-negative and color all vertices $1$.
-If the graph is 2-colorable, we can partition the vertices into positive ($V_1$) and negative ($V_{-1}$).
-The edges within the sets have to be negative and edges between the sets have to be positive, which fulfils the condition for an antibalanced graph.
-
-\begin{proposition}
-    If $(G, \Sigma)$ is a signed complete graph on $n$ vertices, then $\chi ((G, \Sigma)) \leq n$. 
-    Furthermore, $\chi ((G, \Sigma)) = n$ if and only if $(G, \Sigma)$ is balanced.
-\end{proposition}
-
-\cite{chromatic-number} proves the Brooks theorem\cite{brooks} for signed graphs and concludes by proving the 5 color theorem for planar signed graphs.
-
-\begin{theorem}
-    Let $(G, \Sigma)$ be a simple connected signed graph. If $(G, \Sigma)$ is not a balanced copmlete graph,
-    a balanced odd circuit or an unbalanced even circuit, then $\chi ((G, \Sigma)) \leq \Delta (G)$.
-\end{theorem}
-
-($\Delta (G)$ is the maximum degree of $G$)
-
+We can observe that negative edges behave in the same way as unsigned edges. 
+So each proper n-edge coloring of a all-negative signed graph corresponds to a proper unsigned edge coloring of its underlying graph.
+This is one of the reasons for the importance of natural definitions: the signed graphs themselves are in a way a generalization of unsigned graphs, so in the field of signed graphs, we are looking for natural generalizations
+of concepts defined on unsigned graphs. 
