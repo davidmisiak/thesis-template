@@ -187,7 +187,7 @@ Consequently, the construction of a line graph through a bidirected graph does \
 we pick any orientation $B$ of a signed graph $(G, \Sigma)$, then create a bidirected line graph. Each edge will become a vertex.
 New vertices are connected if they previously shared a vertex and the orientation of these edges depends on the consistency of the corresponding half-edges in the previous graph.
 If both edges were incoming or outgoing at their common vertex, the new edge between them will be negative, otherwise it will be positive. 
-For the purposes of constructing a line graph we don't need to deduce the orientation of this line graph, as it will be discarded in the result anyway.
+For the purposes of constructing a line graph we don't need to deduce the orientation of this line graph, as it will be discarded in the final \textit{undirected} lien graph anyway.
 
 The vertex coloring of the line graph directly corresponds to the edge coloring of the bidirected graph, since the edges retain their color after becoming vertices.
 So there is indeed a bijection between the edge coloring of a signed graph and the vertex coloring of its line graph.
