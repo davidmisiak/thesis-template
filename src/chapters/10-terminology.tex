@@ -4,101 +4,78 @@ Here we define the basic terminology used in this thesis.
 
 \section{Graphs}
 
-\begin{definition}
-    We write $G$ for a graph and $V(G)$ and $E(G)$ for its vertes set and edge set respectively.
-    We assume no graph constraints unless otherwise specified, so loops and duplicit edges are allowed in general.
-\end{definition}
+Using the standard notation we write $G$ for a graph and $V(G)$ and $E(G)$ for its vertes set and edge set respectively.
+We assume no graph constraints unless otherwise specified, e. g. loops and duplicit edges are generally allowed.
 
-\begin{definition}
-    We write $e = vw \in E(G)$ to indicate that the edge $e$ of $G$ has endpoints $v$ and $w$.
-\end{definition}
-
-\begin{definition}
-    A \textit{k-regular} graph is a graph where each vertex has degree $k$.
-\end{definition}
-
-\begin{definition}
-    A \textit{circle} or a \textit{circuit} is a connected 2-regular subgraph.
-    A circle is \textit{positive} if the product of its edge signs is positive and 
-    \textit{negative} otherwise.
-\end{definition}
-
-\begin{definition}
-    A \textit{cubic} graph is a 3-regular graph.
-\end{definition}
-
-\begin{definition}
-    A \textit{chromatic number} of a graph $G$ is the number of colors required for a proper vertex coloring of said graph.
-\end{definition}
+We write $e = vw \in E(G)$ to indicate that the edge $e$ of $G$ has endpoints $v$ and $w$.
+In the context of edge and vertex coloring it makes sense to define the next terms. In \textit{regular graphs} all vertices have the same degree, specifically
+a \textit{k-regular} graph is a graph where each vertex has degree exactly $k$ (there is no vertex with more than $k$ edges).
+A \textit{cubic} graph is a 3-regular graph. 
+A \textit{circuit} is a connected 2-regular subgraph. A \textit{factor} of a graph $G$ is a \textit{spanning subgraph} (a subgraph covering all vertices of $G$).
+A \textit{k-factor} is a k-regular spanning subgraph and \textit{k-factorization} partitions all edges of $G$ into disjoint k-factors.
+A circuit is \textit{positive} if the product of its edge signs is positive and 
+\textit{negative} otherwise. In the context of flows in signed graphs, we will be talking about \textit{signed circuits}
+as the signed equivalent to circuits on unsigned graphs.
+A \textit{chromatic number} of a graph $G$ is the number of colors required for a proper vertex coloring of said graph.
 
 \section{Signed graphs}
 
 Signed graphs were introduced by Harary\cite{harary} in 1953 as a model for social networks. 
 A signed graph has a value of $+1$ or $-1$ assigned to all edges, so each edge is positive or negative.
-They have proved to be a natural generalization of unsigned graphs in many ways and interesting observations may arise
+They have been proven to be a natural generalization of unsigned graphs in many ways and interesting observations may arise
 by applying ordinary graph theory to signed graphs.
 
-\begin{definition}
-    A \textit{signed graph} is a pair $(G, \Sigma)$; $\Sigma \subseteq E(G)$, where $\Sigma$ is a subset of the edge set of $G$ and contains the negative edges.
-\end{definition}
+A \textit{signed graph} is a pair $(G, \Sigma)$; $\Sigma \subseteq E(G)$, where $\Sigma$ is a subset of the edge set of $G$ and contains the negative edges.
 
-\begin{definition}
-    Function $\sigma : E(G) \rightarrow \{+1; -1\}$ denotes the sign of an edge $e$.
-\end{definition}
+Function $\sigma : E(G) \rightarrow \{+1; -1\}$ denotes the sign of an edge $e$.
 
 A signed graph can also be defined as a pair $(G, \sigma)$ using the sign function directly,
 but I found this definition more natural.
 
-\begin{definition}
-    Given a signed graph $(G, \Sigma)$, \textit{switching} at a vertex $v$ inverts the sign of each edge
-    incident with $v$. 
-\end{definition}
+Given a signed graph $(G, \Sigma)$, \textit{switching} at a vertex $v$ inverts the sign of each edge
+incident with $v$. 
 
 Using the previously mentioned definition of a signed graph, the resulting graph after a switching
 is the symmetric difference of $\Sigma$ and the set of edges incident with $v$.
 
-\begin{definition}
-    Two graphs are \textit{equivalent} if one can be obtained from the other through a series of vertex switchings.
-    Switching equivalence is an equivalence relation and we write $[(G, \Sigma)]$ for an equivalence class of $(G, \Sigma)$ under this relation.
-\end{definition}
+Two graphs are \textit{equivalent} if one can be obtained from the other through a series of vertex switchings.
+Switching equivalence is an equivalence relation and we write $[(G, \Sigma)]$ for an equivalence class of $(G, \Sigma)$ under this relation.
 
 Additionally, switching doesn't change the signs of circuits in a graph, so two signed graphs 
 are equivalent if their underlying graphs and the signs of all circuits are the same. 
 Consequently, all properties depending only on the signs of the circuits are invariant for all graphs in $[(G, \Sigma)]$.
 
-\begin{definition}
-    A signed graph is \textit{balanced} if all of its circuits are positive.
-\end{definition}
+A signed graph is \textit{balanced} if all of its circuits are positive and unblanaced otherwise.
 
 Balance is an important concept in the sign graph theory, becauase balanced signed graphs $(G, \Sigma)$ are equivalent to $(G, \{\})$ (an all-positive graph with the same underlying graph).
 
-\begin{definition}
-    A signed graph $(G, \Sigma)$ is \textit{antibalanced} if it is equivalent to $(G, V(G))$ (the same graph with all-negative signature).
-\end{definition}
+A signed graph $(G, \Sigma)$ is \textit{antibalanced} if it is equivalent to $(G, V(G))$ (the same graph with all-negative signature).
 
 Equivalent signed graphs have the same sets of positive circuits and same sets of negative circuits.
-Additionally, if $(G, \Sigma)$ is balanced, then $(G, V(G) - \Sigma)$ is antibalanced.
+Additionally, if $(G, \Sigma)$ is balanced, then $(G, V(G) - \Sigma)$ is antibalanced. (Performing the switchings necessary to transofrm $(G, \Sigma)$ to an all-positive graph after flipping all signs leads to an all-negative graph.)
 Given a partition $(A, B)$ of $V(G)$, let $[A, B]$ denote the set of all edges with one end in $A$ and the other in $B$.
+Harary\cite{harary} characterized balanced graphs:
 
-\begin{theorem}[Harary \cite{harary}]\label{vertex-set-partition}
-    A signed graph $(G, \Sigma)$ is balanced if and only if there is a set $X \subseteq V(G)$ such that $\Sigma = [X, V(G) - X]$.
+\begin{theorem}\label{vertex-set-partition}
+A signed graph $(G, \Sigma)$ is balanced if and only if there is a set $X \subseteq V(G)$ such that $\Sigma = [X, V(G) - X]$.
 \end{theorem}
 
 \section{Vertex coloring}
 
 Vertex and edge coloring is a deeply explored topic of graph theory, even in the field of signed graphs.
-The research was initiated by Zaslavsky\cite{zaslavsky-graphs} in the early 1980s and published in multiple seminary papers\cite{zaslavsky-invariants,zaslavsky-coloring,zaslavsky-colorful}.
+The research was initiated by Zaslavsky\cite{zaslavsky-graphs} in the early 1980s and his results were published in multiple seminary papers\cite{zaslavsky-invariants,zaslavsky-coloring,zaslavsky-colorful}.
 Máčajová, Raspaud and Škoviera expand on this topic in The chromatic number of a signed graph\cite{chromatic-number},
-focusing on the behaviour of colorings instead of the polynomial invariants, which Zaslavsky's research concentrates on.
+focusing on the behaviour of colorings instead of the polynomial invariants, which Zaslavsky concentrated on in his research.
 
-\begin{definition}[Zaslavsky]
-    A \textit{proper vertex coloring} of a signed graph $(G, \Sigma)$ is 
-    $\phi : V(E) \rightarrow \mathbb{Z}$
-    where for each edge $e = vw \in E(G)$: $\phi (v) \neq \sigma (e) \phi (w)$.
-\end{definition}
+A \textit{proper vertex coloring} of a signed graph $(G, \Sigma)$ is 
+$\phi : V(E) \rightarrow \mathbb{Z}$
+where for each edge $e = vw \in E(G)$: $\phi (v) \neq \sigma (e) \phi (w)$.
 
 Vertices connected by a positive edge must not have the same color and vertices connected by a negative edge must not have opposite colors.
+
 This definition is natural mainly because of the consistency under vertex switching, but also other reasons discussed by Zaslavsky.
+What is not as natural is the first attempt at a set of signed colors. 
+Unlike colorings on unsigned graphs, here it is practical to assign signed colors from $\mathbb{Z}$ and so arises the problem of defining a signed color set of $k$ colors.
 Zaslavsky originally defined the coloring of a signed graph in $k$ colors or $2k+1$ signed colors as 
 a mapping $V(G) \rightarrow \{-k, -(k-1), \dots, -1,0,1, \dots , (k-1), k\}$. 
 A coloring is zero-free if no vertex is colored 0. He then defined the \textit{chromatic polynomial} $\chi _G (\lambda)$ to be the function
@@ -118,20 +95,20 @@ an \textit{n-coloring} exists. In comparison to Zaslavsky, this way an n-colorin
 
 \section{Edge coloring}
 
-In Edge coloring of signed graphs\cite{behr-edge-coloring}, Behr adopts the signed color sets defined by Máčajová et. al.
+In Edge coloring of signed graphs\cite{behr-edge-coloring}, Behr adopts the signed color sets defined by Máčajová et. al. and using these signed colors 
+defines a proper edge coloring on signed graphs.
 
-\begin{definition}[Behr]
-    An \textit{n-edge coloring} $\gamma$ of $(G, \Gamma)$ is an assignment of colors from $M_n$ to each vertex-edge incidence of $G$ such that $\gamma (v, e)$ = $- \sigma (e) \gamma(w,e)$ for each edge $e = vw$.
-    If an edge $e$ exists such that $\gamma (v,e) = a$, then the color $a$ is present at $v$.
-\end{definition}
+An \textit{n-edge coloring} $\gamma$ of $(G, \Gamma)$ is an assignment of colors from $M_n$ to each vertex-edge incidence of $G$ such that $\gamma (v, e)$ = $- \sigma (e) \gamma(w,e)$ for each edge $e = vw$.
+If an edge $e$ exists such that $\gamma (v,e) = a$, then the color $a$ is present at $v$.
 
 The same condition for a \textit{proper n-edge coloring} applies to the signed version, no color can be present more than once at any vertex.
+The \textit{chromatic index} of a signed graph $(G, \Gamma)$ $\chi ' ((G, \Gamma))$ is the smallest $n$ such that $(G, \Gamma)$ is n-edge-colorable.
 
 Coloring each vertex-edge incidence makes signed edge coloring particularly interesting. 
 This definition also behaves naturally under switching; if we switch a vertex and all colors present at said vertex, the coloring remains consistent.
 But again, we have to be mindful of the color $0$ as in the case of vertex coloring.
 
 We can observe that negative edges behave in the same way as unsigned edges. 
-So each proper n-edge coloring of a all-negative signed graph corresponds to a proper unsigned edge coloring of its underlying graph.
+So each proper n-edge coloring of an all-negative signed graph corresponds to a proper unsigned edge coloring of its underlying graph.
 This is one of the reasons for the importance of natural definitions: the signed graphs themselves are in a way a generalization of unsigned graphs, so in the field of signed graphs, we are looking for natural generalizations
 of concepts defined on unsigned graphs. 

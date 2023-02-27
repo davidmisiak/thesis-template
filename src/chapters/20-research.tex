@@ -4,7 +4,7 @@ In this chapter we offer an overview of the recent research in the field of sign
 
 \section{Chromatic number}
 
-Now we will explore some properties of the chromatic number of signed graphs as defined by Máčajová et. al. The proofs can be found in \cite{chromatic-number}.
+Now we will explore some properties of the chromatic number of signed graphs as defined by Máčajová et. al. We briefly summarize the results, the proofs can be found in \cite{chromatic-number}.
 If $(G, \Sigma)$ has a positive loop, a proper coloring is not possible. So for the rest of this section we assume
 only graphs without positive loops. It is also good to keep in mind that the color $0$ behaves differently from the other colors, because $0 = -0$. 
 (For example if there is a negative loop at a vertex $v$, then $\phi (v) \neq 0$.)
@@ -24,7 +24,7 @@ is also a signed coloring of $(G, \Sigma)$ using colors from $\{0, \pm 1, \pm 2,
 A signed graph is antibalanced if the sign product on every even circuit is positive and on every odd circuit negative.
 (Each such graph is equivalent to an all-negative signature). Based on \cref{vertex-set-partition}, we can partition the 
 vertex set of an antibalanced signed graph into two sets such that each edge with one end in the first set and the other end in the second set is positive and edges inside the sets are negative.
-A balanced antibalanced signed graph has to be bipartite, so antibalanced signed graphs are a natural generalization of bipartite graphs.
+An antibalanced signed graph has to be bipartite, so antibalanced signed graphs are a natural generalization of bipartite graphs.
 
 \begin{proposition}[Máčajová et. al.]
     A signed graph is 2-colorable ($\chi ((G, \Sigma)) \leq 2$) if and only if it is antibalanced.
@@ -32,7 +32,7 @@ A balanced antibalanced signed graph has to be bipartite, so antibalanced signed
 
 If the graph is antibalanced, we can switch some vertices to make it all-negative and color all vertices $1$.
 If the graph is 2-colorable, we can partition the vertices into positive ($V_1$) and negative ($V_{-1}$).
-The edges within the sets have to be negative and edges between the sets have to be positive, which fulfils the condition for an antibalanced graph.
+The edges within the sets have to be negative and edges between the sets have to be positive, which fits the definition of an antibalanced graph.
 
 \begin{proposition}[Máčajová et. al.]
     If $(G, \Sigma)$ is a signed complete graph on $n$ vertices, then $\chi ((G, \Sigma)) \leq n$. 
@@ -40,24 +40,27 @@ The edges within the sets have to be negative and edges between the sets have to
 \end{proposition}
 
 \cite{chromatic-number} proves the Brooks' theorem\cite{brooks} for signed graphs and concludes by proving the five color theorem for planar signed graphs.
-Let's observe the maximmum degree $\Delta$ of signed graphs with regard of the chromatic number.
+Let's observe the maximmum degree $\Delta$ of signed graphs with regard to the chromatic number.
 If we color the vertices greedily using any ordering of the vertices, for each vertex at most
 $\Delta$ colors are taken by previous neighbors. Hence $\chi ((G, \Sigma)) \leq \Delta + 1$. 
 The maximum chromatic number $\Delta + 1$ is reached in case of a balanced complete graph and
-a balanced old ciricuit, similar to the unsigned version. There is one more signed case, however: even unbalanced circuits.
+a balanced odd ciricuit, similar to the unsigned version. There is one more signed case, however: even unbalanced circuits.
 
 \begin{theorem}[Máčajová et. al.]
-    Let $(G, \Sigma)$ be a simple connected signed graph. If $(G, \Sigma)$ is not a balanced copmlete graph,
+    Let $(G, \Sigma)$ be a simple connected signed graph. If $(G, \Sigma)$ is not a balanced complete graph,
     a balanced odd circuit or an unbalanced even circuit, then $\chi ((G, \Sigma)) \leq \Delta (G)$.
 \end{theorem}
 
 ($\Delta (G)$ is the maximum degree of $G$)
 
-\section{Orientation of a signed graph}
+In this article Máčajová et. al. also conjectured that the 4-color-theorem is also true for signed graphs. However, this conjecture
+was later disproved\cite{signed-4-color-conjecture}
+
+\section{Nowhere-zero flows}
 
 Nowhere-zero flows in signed graphs: A survey\cite{nowhere-zero-flows-survey} captures the recent knowledge about nowhere-zero flows and circuit covers in signed graphs.
-Nowhere-zero flows is a dual problem to the already mentioned vertex coloring. 
-It was originally introduced on signed graphs by Edmonds and Johnson\cite{edmonds-johnson} for expressing algorithms on matchings, but the first to systematically study this was Bouchet \cite{bouchet-flows}.
+There is a well-known duality between nowhere-zero flows and vertex coloring of unsigned planar graphs, which has been extended to signed graphs. 
+They was originally introduced on signed graphs by Edmonds and Johnson\cite{edmonds-johnson} for expressing algorithms on matchings, but the first to systematically study this was Bouchet \cite{bouchet-flows}.
 To understand
 the problem of nowhere-zero flows on signed graphs, we first define \textit{signed circuits} (known to be the circuits of the associated signed graphic matroid). 
 They are the equivalent of circuits on unsigned graphs for signed graphs. \cite{nowhere-zero-flows-survey} recognizes two types of signed circuits (\cref{fig:signed-circuits}):
@@ -138,24 +141,53 @@ the lowest value is held by DeVos\cite{devos}.
     Every flow-admissible signed graph admits a nowhere-zero 12-flow.
 \end{theorem}
 
-Generally, assumptions about a graph's connectivity allow for better bounds on its flow number.
-This doesn't have to be true in case of signed graphs (See \cref{one-negative-edge-flow}). 
-So we need to assume flow-admissibility as well. These are the most recently proven bounds for various connectivity assumptions.
+\section{Flows on signed cubic graphs}
 
-\begin{theorem}[Cheng, Lu, Luo, Zhang]
-    Every flow-admissible 2-edge-connected signed graph has a nowhere-zero 11-flow.
+In the field of signed regular graphs, most of the research is focused on signed cubic graphs and this will most likely be 
+the focus of my thesis to some degree. Máčajová and Škoviera
+characterized signed cubic graphs with flow number 3 or 4. In their Remarks on nowhere-zero flows in signed cubic graphs\cite{cubic-signed-graphs}
+they investigate integer and group flows in signed graphs with the following results.
+
+\begin{theorem}
+    Let $(G, \Sigma)$ be a signed cubic graph. Then
+
+    \begin{enumerate}
+        \item [(i)] $(G, \Sigma)$ admits a nowhere-zero 3-flow if and only if it is antibalanced and has a perfect matching (or a 1-factor).
+        \item [(ii)] $(G, \Sigma)$ admits a nowhere-zero $\mathbb{Z}_3$-flow if and only if it is antibalanced.
+        \item [(iii)] $(G, \Sigma)$ admits a nowhere-zero $\mathbb{Z}_4$-flow if and only if it has an antibalanced 2-factor.
+        \item [(iv)] $(G, \Sigma)$ admits a nowhere-zero $\mathbb{Z}_2 \times \mathbb{Z}_2$-flow if and only if $G$ is 3-edge-colourable. 
+    \end{enumerate}
 \end{theorem}
 
-\begin{theorem}[Wu, Ye, Zang, Zhu]
-    Every flow-admissible 3-edge-connected signed graph admits a nowhere-zero 8-flow.
-\end{theorem}
+\section{Edge coloring on signed graphs}
 
-And finally, using signed circular flows;
+Let $\Delta _G$ be the maximum degree among vertices of an ordinary graph $G$. According to Vizing's theorem, $G$ is $n$-edge-colorable, where $n$ is either $\Delta _G$
+or $(\Delta _G + 1)$. In addition to defining edge coloring on signed graphs, Behr also proves the signed version of the Vizing's theorem.
+Remember that edge coloring is an assignment of colors to edge-vertex incidences, not only edges. One of the consequences of this fact
+is that signed Kempe chains (used to switch colors in the original Vizing's theorem) are not paths, but trails. The vertices in one chain may 
+repeat with opposite colors. 
 
-\begin{theorem}[Raspaud, Zhu]
-    Every flow-admissible 4-edge-connected signed graph admits a nowhere-zero 4-flow.
-\end{theorem}
+Finally, Behr shows that every signed edge coloring can be realised as a vertex coloring of a signed line graph.
+Since unsigned edge coloring has this property, it is also desired in the signed version. 
+A line graph of an ordinary graph has a vertex for each edge of the original graph and two vertices are connected if their corresponding edges were originally adjacent
+In order to show this in signed graphs, we need to revisit bidirected graphs. Remember, that bidirected graphs are basically oriented signed graphs, the definition from the Flows section applies as well.
+Positive edges are consistently oriented and negative edges are extroverted or introverted.
+So every bidirected graph can be reverted back to an undirected signed graph based on the consistency of its edge orientations.
 
-In the field of signed regular graphs, most of the research is focused on signed cubic graphs. Máčajová and Škoviera\cite{cubic-signed-graphs}
-characterized signed cubic graphs with flow number 3 or 4. I will later expand on this topic as it will probably be closely related with my work in this thesis.
+A proper coloring of a bidirected graph is an assignment of colors from $M_n$ to edges, \textit{not} edge-vertex incidences. 
+There is no need to involve vertices, because the direction of half-edges for each vertex ensures vertex switching consistency, so only a single color is needed for each vertex.
+Behr shows that given an undirected signed graph and its edge coloring, this coloring uniquely determines edge colorings of each bidirected graph, that can be obtained by giving the original signed graph an orientation.
+Consider the following coloring transformation. In the undirected graph, negative edges have the same color on "both sides", let's say color $a$. So the color of the bidirected edge will be $a$ if it is extroverted and $-a$ if it is introverted.
+Positive edges have opposite colors on their vertices. So the bidirected edge will have the color "it points to", it will inherit the color from the vertex incidence that is incoming.
+Now let's reorient an edge by inverting the orientation of both half-edges and the color. The bidirected coloring remains consistent with the orientation \textit{and} with the original undirected edge coloring.
+So the bidirected coloring is determined uniquely by the original coloring and edge orientation and given two orientations $B$ and $B'$ with their respective colorings $\gamma _b$ and $\gamma _{B'}$ (originating from the same colored graph),
+reorienting edges of $B$ to arrive at $B'$ also transforms $\gamma _B$ into $\gamma _{B'}$.
 
+Consequently, the construction of a signed line graph through a bidirected graph does not depend on the orientation. To create a signed line graph,
+we pick any orientation $B$ of a signed graph $(G, \Sigma)$, then create a bidirected line graph. Each edge will become a vertex.
+New vertices are connected if they previously shared a vertex and the orientation of these edges depends on the consistency of the corresponding half-edges in the previous graph.
+If both edges were incoming or outgoing at their common vertex, the new edge between them will be negative, otherwise it will be positive. 
+For the purposes of constructing a line graph we don't need to deduce the orientation of this line graph, as it will be discarded in the result anyway.
+
+The vertex coloring of the line graph directly corresponds to the edge coloring of the bidirected graph, since the edges retain their color after becoming vertices.
+There is a bijection between the edge coloring of a signed graph and the vertex coloring of its line graph.
