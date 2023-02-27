@@ -95,7 +95,7 @@ are exactly the consistently oriented ones. An oriented signed graph is also cal
 
 \section{Nowhere-zero flows}
 
-Now to the problem itself. Let $\Gamma$ be an Abelian group. A $\Gamma$-flow in $(G, \Sigma)$ consists of an orientation of $(G, \Sigma)$ and 
+Let $\Gamma$ be an Abelian group. A $\Gamma$-flow in $(G, \Sigma)$ consists of an orientation of $(G, \Sigma)$ and 
 a function $\phi : E(G) \rightarrow \Gamma$ such that the usual conservation law is satisfied: 
 for each vertex $v$ the sum of $\phi (e)$ over the incoming edges $e$ equals the sum of $\phi (e)$ over the outgoing edges $e$\cite{nowhere-zero-flows-survey}.
 A $\Gamma$-flow is \textit{nowhere-zero} if the value $0$ is never used for any edge.
@@ -105,11 +105,11 @@ Otherwise $\Phi (G, \Sigma)$ is defined as $\infty$.
 
 A signed graph is said to be \textit{flow-admissible} if it admits at least one nowhere-zero $\mathbb{Z}$-flow.
 
-\begin{theorem}[Bouchet \cite{bouchet-flows}]
+\begin{theorem}[Bouchet\cite{bouchet-flows}]
     A signed graph $(G, \Sigma)$ is flow-admissible if and only if each every edge of $(G, \Sigma)$ belongs to a signed circuit.
 \end{theorem}
 
-Consequently, nowhere-zero flows on signed graphs are a generalization of the same concept on unsigned graphs, 
+Nowhere-zero flows on signed graphs are a generalization of the same concept on unsigned graphs, 
 because the definition of a flow on an all-positive signed graph corresponds to the definition of a flow on an unsigned graph.
 
 Directly from the previous theorem follows 
@@ -135,7 +135,7 @@ Buchet stated the following conjecture, mirroring its importance with the simila
 
 The value 6 would be best possible, since there exist graphs that admit no nowhere-zero 5-flows.
 Bouchet originally also proved the theorem for value 216. This number was improved multiple times, 
-the lowest value is held by DeVos\cite{devos}.
+the lowest value was proved by DeVos\cite{devos}.
 
 \begin{theorem}[DeVos]
     Every flow-admissible signed graph admits a nowhere-zero 12-flow.
@@ -167,7 +167,7 @@ Remember that edge coloring is an assignment of colors to edge-vertex incidences
 is that signed Kempe chains (used to switch colors in the original Vizing's theorem) are not paths, but trails. The vertices in one chain may 
 repeat with opposite colors. 
 
-Finally, Behr shows that every signed edge coloring can be realised as a vertex coloring of a signed line graph.
+Behr shows that every signed edge coloring can be realised as a vertex coloring of a signed line graph.
 Since unsigned edge coloring has this property, it is also desired in the signed version. 
 A line graph of an ordinary graph has a vertex for each edge of the original graph and two vertices are connected if their corresponding edges were originally adjacent
 In order to show this in signed graphs, we need to revisit bidirected graphs. Remember, that bidirected graphs are basically oriented signed graphs, the definition from the Flows section applies as well.
@@ -176,14 +176,14 @@ So every bidirected graph can be reverted back to an undirected signed graph bas
 
 A proper coloring of a bidirected graph is an assignment of colors from $M_n$ to edges, \textit{not} edge-vertex incidences. 
 There is no need to involve vertices, because the direction of half-edges for each vertex ensures vertex switching consistency, so only a single color is needed for each vertex.
-Behr shows that given an undirected signed graph and its edge coloring, this coloring uniquely determines edge colorings of each bidirected graph, that can be obtained by giving the original signed graph an orientation.
-Consider the following coloring transformation. In the undirected graph, negative edges have the same color on "both sides", let's say color $a$. So the color of the bidirected edge will be $a$ if it is extroverted and $-a$ if it is introverted.
-Positive edges have opposite colors on their vertices. So the bidirected edge will have the color "it points to", it will inherit the color from the vertex incidence that is incoming.
+Given an undirected signed graph and its edge coloring, this coloring uniquely determines edge colorings of each bidirected graph, that can be obtained by giving the original signed graph an orientation.
+Consider the following coloring transformation. In the undirected graph, negative edges have the same color on both ends, let's say color $a$. So the color of the bidirected edge will be $a$ if it is extroverted and $-a$ if it is introverted.
+Positive edges have opposite colors on their vertices. The bidirected edge will have the color "it points to", it will inherit the color from the vertex-edge incidence where the edge is incoming.
 Now let's reorient an edge by inverting the orientation of both half-edges and the color. The bidirected coloring remains consistent with the orientation \textit{and} with the original undirected edge coloring.
 So the bidirected coloring is determined uniquely by the original coloring and edge orientation and given two orientations $B$ and $B'$ with their respective colorings $\gamma _b$ and $\gamma _{B'}$ (originating from the same colored graph),
 reorienting edges of $B$ to arrive at $B'$ also transforms $\gamma _B$ into $\gamma _{B'}$.
 
-Consequently, the construction of a signed line graph through a bidirected graph does not depend on the orientation. To create a signed line graph,
+Consequently, the construction of a line graph through a bidirected graph does \textit{not} depend on the orientation. To create a signed line graph,
 we pick any orientation $B$ of a signed graph $(G, \Sigma)$, then create a bidirected line graph. Each edge will become a vertex.
 New vertices are connected if they previously shared a vertex and the orientation of these edges depends on the consistency of the corresponding half-edges in the previous graph.
 If both edges were incoming or outgoing at their common vertex, the new edge between them will be negative, otherwise it will be positive. 
