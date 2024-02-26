@@ -15,8 +15,7 @@
                 "-file-line-error",
                 "-pdf",
                 "-outdir=%OUTDIR%",
-                "%DOC%",
-                "-shell-escape"
+                "%DOC%"
             ],
             "env": {}
         },
