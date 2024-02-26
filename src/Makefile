@@ -1,14 +1,14 @@
-.PHONY: attachments clean all
+.PHONY: clean attachments main all
 
-out/main.pdf: $(filter-out $(wildcard out),$(wildcard *))
-	mkdir -p out
-	latexmk -synctex=1 -interaction=nonstopmode -file-line-error -pdf -outdir=out main
+clean:
+	rm -rf out
 
 attachments:
 	mkdir -p out
 	./attachments.sh
 
-clean:
-	rm -rf out
+main:
+	mkdir -p out
+	latexmk -synctex=1 -interaction=nonstopmode -file-line-error -pdf -outdir=out main
 
-all: clean attachments out/main.pdf
+all: clean attachments main
