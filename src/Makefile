@@ -2,7 +2,7 @@
 
 out/main.pdf: $(filter-out $(wildcard out),$(wildcard *))
 	mkdir -p out
-	latexmk -pdf -interaction=nonstopmode -synctex=1 -file-line-error -outdir=out main
+	latexmk -synctex=1 -interaction=nonstopmode -file-line-error -pdf -outdir=out main -shell-escape
 
 attachments:
 	mkdir -p out

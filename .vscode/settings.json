@@ -1,4 +1,26 @@
 {
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk",
+            "tools": ["latexmk"]
+        }
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "%DOC%",
+                "-shell-escape"
+            ],
+            "env": {}
+        },
+    ],
     "latex-workshop.latex.outDir": "out",
     "latex-workshop.latex.autoBuild.run": "onFileChange",
     "latex-workshop.latex.autoClean.run": "never",

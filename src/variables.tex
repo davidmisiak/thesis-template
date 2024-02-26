@@ -51,17 +51,25 @@
 
 \newcommand{\thesiskeywordsen}{English, keywords, here}
 
+% https://tex.stackexchange.com/questions/7653/how-to-iterate-through-the-name-of-files-in-a-folder
+\makeatletter
+\def\app@exe{\immediate\write18}
+\def\inputAllFiles#1#2{%
+  \app@exe{ls #1/*.tex | xargs cat >> out/#2-inputs.tmp}%
+  \InputIfFileExists{out/#2-inputs.tmp}{}{}
+  \AtEndDocument{\app@exe{/bin/rm -f out/#2-inputs.tmp}}}
+\makeatother
+
 \newcommand{\thesischapters}{
-    \input chapters/00-introduction.tex
-    \input chapters/10-terminology.tex
-    \input chapters/20-algorithms.tex
-    \input chapters/30-results.tex
-    \input chapters/90-conclusion.tex
+    \inputAllFiles{./chapters}{chapters}
+    % This inputs all files from the chapters directory, in alphabetical order.
+    % You can comment it out and input the files manually if you prefer:
+    % \input chapters/00-introduction.tex
+    % ...
 }
 
 \newcommand{\thesisappendices}{
-    \input chapters/91-appendixA.tex
-    \input chapters/92-appendixB.tex
+    \inputAllFiles{./appendices}{appendices}
 }
 
 % Thesis type, field, programme and department are set here automatically, but please check that
