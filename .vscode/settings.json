@@ -3,11 +3,11 @@
     "latex-workshop.latex.autoBuild.run": "onFileChange",
     "latex-workshop.latex.autoClean.run": "never",
     "latex-workshop.view.pdf.viewer": "tab",
-    "latex-workshop.chktex.enabled": true,
+    "latex-workshop.linting.chktex.enabled": true,
     "[bibtex]": {
         "editor.formatOnSave": true,
     },
-    "latex-workshop.chktex.exec.args": [
+    "latex-workshop.linting.chktex.exec.args": [
         "-wall", "-n22", "-n30", "-e16", "-q",
         "-n29"
     ]
