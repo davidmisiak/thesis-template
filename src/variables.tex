@@ -109,3 +109,11 @@
 \newif\ifshowframe{}
 % \showframetrue{} % show page frames to debug positioning
 \showframefalse{} % normal
+
+% EXPERIMENTAL
+% When set to true, tries to omit all images, tables, titles, whitespace, etc.
+% Useful when measuring the actual amount of text written.
+% You might need to run `make -C src clean` beforehand.
+\newif\iftextonly{}
+% \textonlytrue{} % text-only mode
+\textonlyfalse{} % normal

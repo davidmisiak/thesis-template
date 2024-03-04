@@ -18,6 +18,40 @@
 % more package imports and custom commands
 \input definitions.tex
 
+% EXPERIMENTAL: text-only mode (see `iftextonly` definition in variables.tex)
+\iftextonly{}
+    \renewcommand{\chapter}[2][]{}
+    \renewcommand{\section}[2][]{}
+    \renewcommand{\subsection}[2][]{}
+    \renewcommand{\subsubsection}[2][]{}
+    \renewcommand{\includegraphics}[2][]{}
+    \renewcommand{\tikz}[2][]{}
+    \renewcommand{\lstinputlisting}[2][]{}
+    \renewcommand{\tableofcontents}{}
+    \renewcommand{\footnote}{}
+    \makeatletter
+    \renewcommand{\th@plain}{\thm@preskip 0pt\relax\thm@postskip 0pt\relax}
+    \renewcommand{\th@definition}{\thm@preskip 0pt\relax\thm@postskip 0pt\relax}
+    \renewcommand{\th@remark}{\thm@preskip 0pt\relax\thm@postskip 0pt\relax}
+    \makeatother
+    \usepackage{enumitem}
+    \setlist[enumerate]{topsep=0pt,itemsep=0pt,partopsep=0pt,parsep=0pt}
+    \setlist[itemize]{topsep=0pt,itemsep=0pt,partopsep=0pt,parsep=0pt}
+    \setlist[description]{topsep=0pt,itemsep=0pt,partopsep=0pt,parsep=0pt}
+    \usepackage{etoolbox}
+    \newcommand{\zerodisplayskips}{
+    \setlength{\abovedisplayskip}{-4pt}
+    \setlength{\belowdisplayskip}{-4pt}
+    \setlength{\abovedisplayshortskip}{-4pt}
+    \setlength{\belowdisplayshortskip}{-4pt}}
+    \appto{\normalsize}{\zerodisplayskips}
+    \appto{\small}{\zerodisplayskips}
+    \appto{\footnotesize}{\zerodisplayskips}
+    \usepackage{comment}
+    \excludecomment{figure}\let\endfigure\relax
+    \excludecomment{table}\let\endtable\relax
+\fi
+
 \begin{document}
 
 \ifenglish{}
